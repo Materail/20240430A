@@ -5,7 +5,7 @@ int main()
 {
     while (1)
     {
-        char op;
+        char op; 
         scanf("%c", &op);
         switch(op) 
         {
