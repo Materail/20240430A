@@ -37,6 +37,23 @@ Matrix add_matrix(Matrix a, Matrix b)
 Matrix sub_matrix(Matrix a, Matrix b)
 {
     // ToDo
+    if (a.rows==b.rows && a.cols==b.cols)
+    {
+        Matrix c= create_matrix(a.rows,a.cols);
+        for(int i=0;i<a.rows;i++)
+        {
+                for(int j=0;j<a.cols;j++)
+                {
+                    c.data[i][j]=a.data[i][j]-b.data[i][j];
+                }
+        }
+        print_matrix(c);
+    }
+    else
+    {
+        printf("Error: Matrix a and b must have the same rows and cols.");
+    }
+    
     return create_matrix(0, 0);
 }
 
