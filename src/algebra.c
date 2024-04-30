@@ -60,25 +60,103 @@ Matrix sub_matrix(Matrix a, Matrix b)
 Matrix mul_matrix(Matrix a, Matrix b)
 {
     // ToDo
+    if (a.cols==b.rows)
+    {
+        Matrix c= create_matrix(a.rows,b.cols);
+        for(int i=0;i<a.rows;i++)
+        {
+                for(int j=0;j<b.rows;j++)
+                {
+                    for(int k=0;k<a.cols;k++)
+                    {
+                        c.data[i][j]+=a.data[i][k]*b.data[k][j];
+                    }
+                }
+        }
+        print_matrix(c);
+    }
+    else
+    {
+        printf("Error: Matrix a and b must have the same rows and cols.");
+    }
     return create_matrix(0, 0);
 }
 
 Matrix scale_matrix(Matrix a, double k)
 {
     // ToDo
+    
+        Matrix b= create_matrix(a.rows,a.cols);
+        for(int i=0;i<a.rows;i++)
+        {
+                for(int j=0;j<a.cols;j++)
+                {
+                    b.data[i][j]=a.data[i][j]*k;
+                }
+        }
+        print_matrix(b);
+    
     return create_matrix(0, 0);
 }
 
 Matrix transpose_matrix(Matrix a)
 {
     // ToDo
+    Matrix b= create_matrix(a.rows,a.cols);
+        for(int i=0;i<a.rows;i++)
+        {
+                for(int j=0;j<a.cols;j++)
+                {
+                    b.data[i][j]=a.data[j][i];
+                }
+        }
+        print_matrix(b);
     return create_matrix(0, 0);
 }
 
 double det_matrix(Matrix a)
 {
     // ToDo
-    return 0;
+    double sum=0;
+    if (a.rows==a.cols&&a.rows>2)
+    {
+        Matrix b= create_matrix(a.rows-1,a.cols-1); /*取第一行*/
+        
+      
+        for(int i=0;i<a.rows;i++)
+        {
+            for(int j=0;j<a.rows-1;j++)
+            {
+                for(int k=0;k<a.rows-1;k++){
+                    if (j<i)
+                    {
+                        b.data[i][j]=a.data[i+1][j];
+                    }
+                   else
+                   {
+                        b.data[i][j]=a.data[i+1][j+1];
+                   }
+                }
+            }
+            sum=a.data[0][i]*pow(-1,i)*det_matrix(b);
+                
+        }
+        
+        
+    }
+    else if (a.rows=2)
+    {
+        sum=a.data[0][0]*a.data[1][1]-a.data[1][0]*a.data[0][1];
+    }
+    else if (a.rows=1)
+    {
+        sum=a.data[0][0];
+    }
+    else
+    {
+        printf("Error: Matrix a and b must have the same rows and cols.");
+    }
+    return sum;
 }
 
 Matrix inv_matrix(Matrix a)
