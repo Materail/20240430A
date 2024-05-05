@@ -138,7 +138,12 @@ double det_matrix(Matrix a)
                    }
                 }
             }
-            sum=a.data[0][i]*pow(-1,i)*det_matrix(b);
+            int mult=1;
+            for(int m=0;m<i;m++)
+            {
+                mult=mult*(-1);
+            }
+            sum=a.data[0][i]*mult*det_matrix(b);
                 
         }
         
